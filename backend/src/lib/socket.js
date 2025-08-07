@@ -6,7 +6,7 @@ const app = express()
 const server = http.createServer(app)
 const io = new Server(server, {
     cors: {
-        origin: process.env.NODE_ENV === "production" ? ["your render frontend url"] : ["http://localhost:5173"]
+        origin: process.env.NODE_ENV === "production" ? ["https://traviki-travel-blog-app.onrender.com"] : ["http://localhost:5173"]
     }
 })
 
