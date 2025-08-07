@@ -13,7 +13,7 @@ import { app, server } from "./lib/socket.js"
 dotenv.config()
 
 app.use(cors({
-  origin: process.env.NODE_ENV === "production" ? ["your render frontend url"] : ["http://localhost:5173"],
+  origin: process.env.NODE_ENV === "production" ? ["https://traviki-travel-blog-app.onrender.com"] : ["http://localhost:5173"],
   credentials: true,
 }));
 
