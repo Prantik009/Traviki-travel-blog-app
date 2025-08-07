@@ -10,7 +10,7 @@ export const setupSocketConnection = createAsyncThunk(
   async (userId, { dispatch }) => {
     socket = io(
       import.meta.env.NODE_ENV === "production"
-        ? "your render backend url"
+        ? "https://traviki-travel-blog-app-backend.onrender.com"
         : "http://localhost:5005",
       {
         query: { userId },
