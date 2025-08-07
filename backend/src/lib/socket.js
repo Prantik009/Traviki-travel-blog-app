@@ -5,10 +5,13 @@ import express from "express"
 const app = express()
 const server = http.createServer(app)
 const io = new Server(server, {
-    cors: {
-        origin: process.env.NODE_ENV === "production" ? ["https://traviki-travel-blog-app.onrender.com"] : ["http://localhost:5173"]
-    }
+  cors: {
+    origin: process.env.NODE_ENV === "production"
+      ? "https://traviki-travel-blog-app.onrender.com"
+      : "http://localhost:5173"
+  }
 })
+
 
 export function getReceiverSocketId(userId){
     return userSocketMap[userId]
