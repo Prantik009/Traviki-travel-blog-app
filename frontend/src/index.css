@@ -1,0 +1,12 @@
+@import url('https://fonts.googleapis.com/css2?family=Libertinus+Serif:ital,wght@0,400;0,600;0,700;1,400;1,600;1,700&family=Nerko+One&family=Noto+Serif:ital,wght@0,100..900;1,100..900&display=swap');
+@import "tailwindcss";
+@plugin "daisyui";
+
+@theme{
+  --font-nerko: "Nerko One", cursive;
+  --font-liberty: "Libertinus Serif", serif;
+}
+
+@utility blog-active {
+   @apply border border-white/30 rounded-md shadow-md
+}
