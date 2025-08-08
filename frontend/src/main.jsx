@@ -1,10 +1,15 @@
-import { StrictMode } from 'react';
+import { StrictMode, useEffect } from 'react';
 import { createRoot } from 'react-dom/client';
 import { createBrowserRouter, RouterProvider } from 'react-router-dom';
 import { Provider, useDispatch, useSelector } from 'react-redux';
-import { useEffect } from 'react';
 import store from './store/store.js';
-import { checkAuth, setupSocketConnection, disconnectSocket, socket } from './store/slices/authSlice';
+import {
+  checkAuth,
+  setupSocketConnection,
+  disconnectSocket,
+  socket,
+  logout as logoutAction,
+} from './store/slices/authSlice';
 import { addNewMessage } from './store/slices/chatSlice';
 
 import './index.css';
@@ -12,33 +17,48 @@ import App from './App.jsx';
 import { AuthLayout } from './components/auth/AuthLayout.jsx';
 import { Login } from './components/auth/Login.jsx';
 import { Signup } from './components/auth/Signup.jsx';
-import { AddBlogPage, ChatPage, HomePage, MyBlogsPage, ProfilePage, ReadBlogPage } from './pages';
+import {
+  AddBlogPage,
+  ChatPage,
+  HomePage,
+  MyBlogsPage,
+  ProfilePage,
+  ReadBlogPage,
+} from './pages';
 
 const AppWrapper = () => {
   const dispatch = useDispatch();
-  const { isAuthenticated, user } = useSelector((state) => state.auth);
+  const { isAuthenticated, user, error } = useSelector((state) => state.auth);
 
+  // Initial auth check on mount
   useEffect(() => {
     dispatch(checkAuth());
-
-    return () => {
-      dispatch(disconnectSocket());
-    };
   }, [dispatch]);
 
+  // Setup socket connection after successful auth
   useEffect(() => {
-    if (isAuthenticated && user) {
+    if (isAuthenticated && user?._id) {
       dispatch(setupSocketConnection(user._id));
 
-      socket?.on("newMessage", (message) => {
+      socket?.on('newMessage', (message) => {
         dispatch(addNewMessage(message));
       });
 
       return () => {
-        socket?.off("newMessage");
+        socket?.off('newMessage');
+        dispatch(disconnectSocket());
       };
+    } else {
+      dispatch(disconnectSocket());
     }
   }, [isAuthenticated, user, dispatch]);
+
+  // Auto logout on auth failure
+  useEffect(() => {
+    if (error === 'Not Authenticated.') {
+      dispatch(logoutAction());
+    }
+  }, [error, dispatch]);
 
   return <RouterProvider router={router} />;
 };
@@ -117,7 +137,9 @@ const router = createBrowserRouter([
 ]);
 
 createRoot(document.getElementById('root')).render(
+  <StrictMode>
     <Provider store={store}>
       <AppWrapper />
     </Provider>
+  </StrictMode>
 );

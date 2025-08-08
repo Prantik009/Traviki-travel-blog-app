@@ -5,14 +5,14 @@ export const AuthLayout = ({ children, authentication = true }) => {
   const { isAuthenticated, loading } = useSelector((state) => state.auth);
 
   if (loading) {
-    return null;
+    return <div className="loading">Loading...</div>;
   }
 
   if (authentication && !isAuthenticated) {
-    return <Navigate to="/login" />;
+    return <Navigate to="/login" replace />;
   }
   if (!authentication && isAuthenticated) {
-    return <Navigate to="/" />;
+    return <Navigate to="/" replace />;
   }
 
   return children;
