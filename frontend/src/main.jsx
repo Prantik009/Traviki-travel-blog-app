@@ -21,9 +21,9 @@ const AppWrapper = () => {
   useEffect(() => {
     dispatch(checkAuth());
 
-    return () => {
-      dispatch(disconnectSocket());
-    };
+    // return () => {
+    //   dispatch(disconnectSocket());
+    // };
   }, [dispatch]);
 
   useEffect(() => {
