@@ -2,7 +2,7 @@
 import axios from "axios";
 
 const BASE_URL =
-  import.meta.env.MODE === "development"
+  import.meta.env.NODE_ENV === "development"
     ? "http://localhost:5005/api"
     : "https://traviki-travel-blog-app-backend.onrender.com/api";
 
