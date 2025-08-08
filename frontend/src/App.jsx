@@ -7,7 +7,7 @@ import { useEffect } from 'react';
 
 const App = () => {
   const location = useLocation();
-  const { isAuthenticated } = useSelector((state) => state.auth);
+  const { isAuthenticated, user, loading } = useSelector((state) => state.auth);
 
   const hideFooterRoutes = ['/add-posts', '/update-profile', '/chat'];
   const showFooter = !hideFooterRoutes.includes(location.pathname);
@@ -15,6 +15,12 @@ const App = () => {
   useEffect(() => {
     window.scrollTo({ top: 0, behavior: "smooth" });
   }, [location.pathname]);
+
+  if (loading && !user) return (
+    <div className="flex items-center justify-center h-screen">
+      <Loader className="size-10 animate-spin" />
+    </div>
+  ) 
 
   return (
     <div className="max-w-7xl bg-[#f9f9f9] text-black w-full min-h-screen">

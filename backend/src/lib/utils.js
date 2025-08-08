@@ -3,7 +3,7 @@ export const generateToken = (userId, res)=> {
     //create a token
     const token = jwt.sign({userId}, process.env.JWT_TOKEN,{
         expiresIn: "7d"
-    })
+})
     //debugging 
     console.log("Cookies generated");
     //create cookie
