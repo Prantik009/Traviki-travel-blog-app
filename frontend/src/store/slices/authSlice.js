@@ -78,6 +78,8 @@ export const checkAuth = createAsyncThunk(
     try {
       const res = await axios.get("/auth/check-auth");
       thunkAPI.dispatch(setupSocketConnection(res.data._id));
+      console.log(res.data);
+      
       return res.data;
     } catch (error) {
       return thunkAPI.rejectWithValue("Not Authenticated.", error);
