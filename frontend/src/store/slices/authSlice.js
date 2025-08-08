@@ -15,9 +15,9 @@ export const setupSocketConnection = createAsyncThunk(
       }
     );
 
-    // socket.on("connect", () => {
-    //   console.log("Connected to Socket.IO server");
-    // });
+    socket.on("connect", () => {
+      console.log("Connected to Socket.IO server");
+    });
 
     socket.on("getOnlineUsers", (onlineUsers) => {
       dispatch(setOnlineUsers(onlineUsers));
