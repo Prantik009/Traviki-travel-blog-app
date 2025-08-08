@@ -25,8 +25,6 @@ app.use(express.urlencoded({ extended: true, limit: '10mb' }));
 app.use(cookieParser())
 app.use(cors({
   origin: process.env.NODE_ENV === "production" ? "https://traviki-travel-blog-app.onrender.com" : "http://localhost:5173",
-  methods: ["GET", "POST", "PUT", "DELETE", "OPTIONS"],
-  allowedHeaders: ["Content-Type", "Authorization"],
   credentials: true,
 }));
 
