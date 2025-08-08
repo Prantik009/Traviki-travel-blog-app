@@ -3,6 +3,7 @@ import axios from '../../utils/axios';
 import { io } from 'socket.io-client';
 
 let socket = null;
+const BASE_URL= import.meta.env.MODE === "development" ? "http://localhost:5005" :  "https://traviki-travel-blog-app-backend.onrender.com"
 
 export const setupSocketConnection = createAsyncThunk(
   'auth/setupSocketConnection',
@@ -10,7 +11,7 @@ export const setupSocketConnection = createAsyncThunk(
     if (socket) {
       socket.disconnect();
     }
-    socket = io('https://traviki-travel-blog-app-backend.onrender.com', {
+    socket = io(BASE_URL, {
       query: { userId },
     });
 
