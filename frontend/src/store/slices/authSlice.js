@@ -9,9 +9,7 @@ export const setupSocketConnection = createAsyncThunk(
   "auth/setupSocketConnection",
   async (userId, { dispatch }) => {
     socket = io(
-      import.meta.env.NODE_ENV === "production"
-        ? "https://traviki-travel-blog-app-backend.onrender.com"
-        : "http://localhost:5005",
+      "https://traviki-travel-blog-app-backend.onrender.com",
       {
         query: { userId },
       }
