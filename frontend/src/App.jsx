@@ -4,6 +4,7 @@ import { Toaster } from 'react-hot-toast';
 import { Header } from './components/Header';
 import { Footer } from './components/Footer';
 import { useEffect } from 'react';
+import { Loader } from 'lucide-react';
 
 const App = () => {
   const location = useLocation();
