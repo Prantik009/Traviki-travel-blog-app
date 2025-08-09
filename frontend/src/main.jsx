@@ -29,7 +29,7 @@ import { Loader } from "lucide-react";
 
 const AppWrapper = () => {
   const dispatch = useDispatch();
-  const { isAuthenticated, user, error, loading } = useSelector(
+  const { isAuthenticated, user, error } = useSelector(
     (state) => state.auth
   );
 
@@ -62,13 +62,6 @@ const AppWrapper = () => {
       dispatch(logoutAction());
     }
   }, [error, dispatch]);
-
-  if (loading)
-    return (
-      <div className="flex items-center justify-center h-screen">
-        <Loader className="size-10 animate-spin" />
-      </div>
-    );
 
   return <RouterProvider router={router} />;
 };
