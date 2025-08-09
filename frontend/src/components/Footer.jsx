@@ -1,6 +1,7 @@
 import { Instagram, Linkedin, Twitter } from "lucide-react";
 import toast from "react-hot-toast";
 import { IoMdHeart } from "react-icons/io";
+import { Link } from "react-router-dom";
 export const Footer = () => {
   const currYear = new Date().getFullYear();
   const sendEmail = (e) => {
