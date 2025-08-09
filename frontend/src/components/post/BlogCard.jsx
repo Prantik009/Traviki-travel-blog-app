@@ -28,7 +28,7 @@ export const BlogCard = ({title, content, blogImg, authorName, authorProfile, po
       <div className="content px-5 md:px-15 space-y-4 pb-5 ">
         <div className="auth-info">
           <div className="auth-profile flex gap-1 items-end">
-            <img src={authorProfile ?  authorProfile : "./profile.png"} alt="" className="size-10" />
+            <img src={authorProfile ?  authorProfile : "./profile.png"} alt="" className="size-10 rounded-full" />
             <div className="auth-name text-xs/4 mb-0.5">
               <div className="name capitalize">{authorName}</div>
               <div className="rel-date">

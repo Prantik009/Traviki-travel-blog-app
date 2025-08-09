@@ -71,9 +71,9 @@ export const checkAuth = createAsyncThunk('auth/check-auth', async (_, thunkAPI)
 
 export const logout = createAsyncThunk('auth/logout', async (_, thunkAPI) => {
   try {
-    await axios.post('/auth/logout');
+    const res = await axios.post('/auth/logout');
     thunkAPI.dispatch(disconnectSocket());
-    return null;
+    return res.data;
   } catch (error) {
     return thunkAPI.rejectWithValue(error.response?.data?.message || 'Logout Failed');
   }
@@ -93,7 +93,7 @@ export const updateProfile = createAsyncThunk(
 
 const initialState = {
   user: null,
-  loading: false,
+  loading: true,
   error: null,
   isAuthenticated: false,
   onlineUsers: [],

@@ -8,6 +8,7 @@ const postSchema = new mongoose.Schema({
   blogImage: { type: String },
   blogLocation: {type:String, required: true},
   slug: { type: String, required: true, unique: true },
+  //here will be the post like number
 }, { timestamps: true });
 
 const Post = mongoose.model("Post", postSchema);

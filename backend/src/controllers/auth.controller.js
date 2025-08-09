@@ -25,7 +25,6 @@ export const signup = async (req, res) => {
       await newUser.save();
       //generate token here
       generateToken(newUser._id, res);
-      
 
       // debugging
       res.status(201).json({
@@ -118,11 +117,14 @@ export const updateProfile = async (req, res) => {
   }
 };
 
-export const checkAuth =  (req, res)=> {
-    try {
-        res.status(200).json(req.user)
-    } catch (error) {
-        console.log("Error in check auth controller", error.message);
-        return res.status(500).json({ message: "Internal Server error"}) 
+export const checkAuth = (req, res) => {
+  try {
+    if (!req.user) {
+      return res.status(401).json({ message: "Not authenticated" });
     }
-}
+    res.status(200).json(req.user);
+  } catch (error) {
+    console.log("Error in check auth controller", error.message);
+    return res.status(500).json({ message: "Internal Server error" });
+  }
+};

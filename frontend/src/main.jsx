@@ -1,22 +1,22 @@
-import { StrictMode, useEffect } from 'react';
-import { createRoot } from 'react-dom/client';
-import { createBrowserRouter, RouterProvider } from 'react-router-dom';
-import { Provider, useDispatch, useSelector } from 'react-redux';
-import store from './store/store.js';
+import { StrictMode, useEffect } from "react";
+import { createRoot } from "react-dom/client";
+import { createBrowserRouter, RouterProvider } from "react-router-dom";
+import { Provider, useDispatch, useSelector } from "react-redux";
+import store from "./store/store.js";
 import {
   checkAuth,
   setupSocketConnection,
   disconnectSocket,
   socket,
   logout as logoutAction,
-} from './store/slices/authSlice';
-import { addNewMessage } from './store/slices/chatSlice';
+} from "./store/slices/authSlice";
+import { addNewMessage } from "./store/slices/chatSlice";
 
-import './index.css';
-import App from './App.jsx';
-import { AuthLayout } from './components/auth/AuthLayout.jsx';
-import { Login } from './components/auth/Login.jsx';
-import { Signup } from './components/auth/Signup.jsx';
+import "./index.css";
+import App from "./App.jsx";
+import { AuthLayout } from "./components/auth/AuthLayout.jsx";
+import { Login } from "./components/auth/Login.jsx";
+import { Signup } from "./components/auth/Signup.jsx";
 import {
   AddBlogPage,
   ChatPage,
@@ -24,11 +24,13 @@ import {
   MyBlogsPage,
   ProfilePage,
   ReadBlogPage,
-} from './pages';
+} from "./pages";
 
 const AppWrapper = () => {
   const dispatch = useDispatch();
-  const { isAuthenticated, user, error } = useSelector((state) => state.auth);
+  const { isAuthenticated, user, error, loading } = useSelector(
+    (state) => state.auth
+  );
 
   // Initial auth check on mount
   useEffect(() => {
@@ -40,12 +42,12 @@ const AppWrapper = () => {
     if (isAuthenticated && user?._id) {
       dispatch(setupSocketConnection(user._id));
 
-      socket?.on('newMessage', (message) => {
+      socket?.on("newMessage", (message) => {
         dispatch(addNewMessage(message));
       });
 
       return () => {
-        socket?.off('newMessage');
+        socket?.off("newMessage");
         dispatch(disconnectSocket());
       };
     } else {
@@ -55,21 +57,28 @@ const AppWrapper = () => {
 
   // Auto logout on auth failure
   useEffect(() => {
-    if (error === 'Not Authenticated.') {
+    if (error === "Not Authenticated.") {
       dispatch(logoutAction());
     }
   }, [error, dispatch]);
+
+  if (loading)
+    return (
+      <div className="flex items-center justify-center h-screen">
+        <Loader className="size-10 animate-spin" />
+      </div>
+    );
 
   return <RouterProvider router={router} />;
 };
 
 const router = createBrowserRouter([
   {
-    path: '/',
+    path: "/",
     element: <App />,
     children: [
       {
-        path: '/',
+        path: "/",
         element: (
           <AuthLayout authentication={true}>
             <HomePage />
@@ -77,7 +86,7 @@ const router = createBrowserRouter([
         ),
       },
       {
-        path: '/login',
+        path: "/login",
         element: (
           <AuthLayout authentication={false}>
             <Login />
@@ -85,7 +94,7 @@ const router = createBrowserRouter([
         ),
       },
       {
-        path: '/signup',
+        path: "/signup",
         element: (
           <AuthLayout authentication={false}>
             <Signup />
@@ -93,7 +102,7 @@ const router = createBrowserRouter([
         ),
       },
       {
-        path: '/my-posts',
+        path: "/my-posts",
         element: (
           <AuthLayout authentication={true}>
             <MyBlogsPage />
@@ -101,7 +110,7 @@ const router = createBrowserRouter([
         ),
       },
       {
-        path: '/add-posts',
+        path: "/add-posts",
         element: (
           <AuthLayout authentication={true}>
             <AddBlogPage />
@@ -109,7 +118,7 @@ const router = createBrowserRouter([
         ),
       },
       {
-        path: '/post/:slug',
+        path: "/post/:slug",
         element: (
           <AuthLayout authentication={true}>
             <ReadBlogPage />
@@ -117,7 +126,7 @@ const router = createBrowserRouter([
         ),
       },
       {
-        path: '/update-profile',
+        path: "/update-profile",
         element: (
           <AuthLayout authentication={true}>
             <ProfilePage />
@@ -125,7 +134,7 @@ const router = createBrowserRouter([
         ),
       },
       {
-        path: '/chat',
+        path: "/chat",
         element: (
           <AuthLayout authentication={true}>
             <ChatPage />
@@ -136,7 +145,7 @@ const router = createBrowserRouter([
   },
 ]);
 
-createRoot(document.getElementById('root')).render(
+createRoot(document.getElementById("root")).render(
   <StrictMode>
     <Provider store={store}>
       <AppWrapper />
