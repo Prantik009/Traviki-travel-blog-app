@@ -24,6 +24,8 @@ import {
   MyBlogsPage,
   ProfilePage,
   ReadBlogPage,
+  ContactPage, 
+  AboutPage
 } from "./pages";
 import { Loader } from "lucide-react";
 
@@ -135,6 +137,8 @@ const router = createBrowserRouter([
           </AuthLayout>
         ),
       },
+      { path: "/about", element: <AboutPage /> },
+      { path: "/contact", element: <ContactPage /> },
     ],
   },
 ]);

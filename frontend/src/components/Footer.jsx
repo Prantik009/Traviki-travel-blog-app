@@ -3,9 +3,11 @@ import toast from "react-hot-toast";
 import { IoMdHeart } from "react-icons/io";
 export const Footer = () => {
   const currYear = new Date().getFullYear();
-  const sendEmail = ()=> {
-    toast.success("Thank You for you Subcription. 🎊")
-  }
+  const sendEmail = (e) => {
+    e.preventDefault();
+    toast.success("Thank You for your Subscription 🎊");
+  };
+
   return (
     <div className="max-w-7xl w-full">
       <div className="py-10 px-5 w-full flex gap-8 justify-between md:flex-row flex-col">
@@ -17,13 +19,19 @@ export const Footer = () => {
               directly in your inbox, exclusive content, and updates you won't
               want to miss.
             </p>
-            <form className="w-full flex gap-5 md:flex-row flex-col" onSubmit={sendEmail}>
+            <form
+              className="w-full flex gap-5 md:flex-row flex-col"
+              onSubmit={sendEmail}
+            >
               <input
                 type="text"
                 placeholder="Enter your email address"
                 className="py-3 px-2 border rounded-lg w-full md:w-[70%] hover:ring-2 hover:ring-indigo-500 outline-none"
               />
-              <button className="bg-blue-500 text-white px-4 py-3 rounded-lg hover:bg-indigo-600 transition-all delay-100 cursor-pointer  " type="submit">
+              <button
+                className="bg-blue-500 text-white px-4 py-3 rounded-lg hover:bg-indigo-600 transition-all delay-100 cursor-pointer  "
+                type="submit"
+              >
                 Subscribe
               </button>
             </form>
@@ -35,14 +43,20 @@ export const Footer = () => {
               <div className="border-none border-white">
                 <h1 className="text-xl font-bold pb-2">Quick links</h1>
                 <ul>
-                  <li className="hover:text-indigo-500 transition-all cursor-pointer delay-200">
-                    About us
+                  <li
+                    className="hover:text-indigo-500 transition-all cursor-pointer delay-200"
+                   
+                  >
+                    <Link to="/about">About us</Link>
+                  </li>
+                  <li
+                    className="hover:text-indigo-500 transition-all cursor-pointer delay-200"
+                    
+                  >
+                    <Link to="/contact">Contact us</Link>
                   </li>
                   <li className="hover:text-indigo-500 transition-all cursor-pointer delay-200">
-                    Contact us
-                  </li>
-                  <li className="hover:text-indigo-500 transition-all cursor-pointer delay-200">
-                    Blogs
+                    <Link to="/">Blogs</Link>
                   </li>
                 </ul>
               </div>
