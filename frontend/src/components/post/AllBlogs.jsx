@@ -2,7 +2,7 @@ import { BlogCard } from "./BlogCard";
 import { useSelector, useDispatch } from "react-redux";
 import { getAllPosts } from "../../store/slices/blogSlice";
 import { useEffect } from "react";
-import { ChevronDown, FunnelPlus } from "lucide-react";
+import { ChevronDown, FunnelPlus, Loader } from "lucide-react";
 import { Link } from "react-router-dom";
 export const AllBlogs = () => {
   const dispatch = useDispatch();
