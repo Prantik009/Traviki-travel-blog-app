@@ -25,6 +25,7 @@ import {
   ProfilePage,
   ReadBlogPage,
 } from "./pages";
+import { Loader } from "lucide-react";
 
 const AppWrapper = () => {
   const dispatch = useDispatch();
