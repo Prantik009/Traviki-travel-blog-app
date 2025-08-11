@@ -72,6 +72,7 @@ export const checkAuth = createAsyncThunk('auth/check-auth', async (_, thunkAPI)
 export const logout = createAsyncThunk('auth/logout', async (_, thunkAPI) => {
   try {
     const res = await axios.post('/auth/logout');
+    console.log("Log out called from authSlice");
     thunkAPI.dispatch(disconnectSocket());
     return res.data;
   } catch (error) {
