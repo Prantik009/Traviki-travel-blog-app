@@ -115,8 +115,8 @@ To deploy your own instance:
 
 ## 📸 Screenshots
 
-![Home](frontend\public\screenshots\home.png)
-<!-- ![HomeZoom](frontend\public\screenshots\Home_zoom.png) -->
+<!-- ![Home](frontend\public\screenshots\home.png) -->
+![HomeZoom](frontend\public\screenshots\Home_zoom.png)
 ![singlepost](frontend\public\screenshots\singlepost.png)
 ![createPost](frontend\public\screenshots\createPost.png)
 ![chat](frontend\public\screenshots\chat.png)
